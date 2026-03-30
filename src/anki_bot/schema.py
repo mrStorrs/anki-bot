@@ -92,4 +92,4 @@ def load_deck_file(path: Path) -> DeckFile:
     try:
         return DeckFile.model_validate(data)
     except Exception as exc:
-        raise type(exc)(f"Validation failed for {path}: {exc}") from exc
+        raise ValueError(f"Validation failed for {path}:\n{exc}") from exc

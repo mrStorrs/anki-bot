@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
+import re
 import zlib
 from pathlib import Path
 
 import genanki
 
-from anki_bot.schema import BasicCard, ClozeCard, load_deck_file
+from anki_bot.schema import BasicCard, ClozeCard, DeckFile, load_deck_file
 
+# Stable model ID — changing this will orphan cards in existing Anki collections.
 BASIC_MODEL = genanki.Model(
     1607392319,
     "AnkiBot Basic",
@@ -22,6 +24,7 @@ BASIC_MODEL = genanki.Model(
     ],
 )
 
+# Stable model ID — changing this will orphan cards in existing Anki collections.
 CLOZE_MODEL = genanki.Model(
     998877661,
     "AnkiBot Cloze",
@@ -56,13 +59,10 @@ def build_deck(deck_path: Path, output_dir: Path | None = None) -> Path:
     Returns the Path to the generated .apkg file.
     """
     deck_path = deck_path.resolve()
-    root_name = _title_case_name(deck_path.name)
 
     root_yaml = deck_path / "cards.yaml"
     root_deck_file = load_deck_file(root_yaml)
-
-    if root_deck_file.config.name:
-        root_name = root_deck_file.config.name
+    root_name = root_deck_file.config.name
 
     root_deck = genanki.Deck(
         deck_id=_stable_id(root_name),
@@ -96,7 +96,7 @@ def build_deck(deck_path: Path, output_dir: Path | None = None) -> Path:
         output_dir = deck_path / "build"
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    safe_filename = root_name.replace("::", "_").replace(" ", "_")
+    safe_filename = re.sub(r"[^\w-]", "_", root_name.replace("::", "_"))
     output_path = output_dir / f"{safe_filename}.apkg"
 
     package = genanki.Package(all_decks)
@@ -107,12 +107,12 @@ def build_deck(deck_path: Path, output_dir: Path | None = None) -> Path:
 
 def _add_cards(
     deck: genanki.Deck,
-    deck_file,
+    deck_file: DeckFile,
     deck_level_tags: list[str],
 ) -> None:
     """Add all cards from a DeckFile to a genanki Deck."""
     for card in deck_file.cards:
-        combined_tags = list({*deck_level_tags, *card.tags})
+        combined_tags = sorted({*deck_level_tags, *card.tags})
 
         if isinstance(card, BasicCard):
             note = genanki.Note(
