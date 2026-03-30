@@ -1,0 +1,20 @@
+config:
+  name: "Basics"
+  description: "Foundational knowledge cards in the Example sub-deck."
+
+cards:
+  - type: basic
+    front: "How many continents are there?"
+    back: "7 (Africa, Antarctica, Asia, Australia/Oceania, Europe, North America, South America)"
+
+  - type: basic
+    front: "What is the boiling point of water at sea level in Celsius?"
+    back: "100°C"
+    tags:
+      - science
+
+  - type: basic
+    front: "What does 'CPU' stand for?"
+    back: "Central Processing Unit"
+    tags:
+      - computing
