@@ -5,7 +5,7 @@ Research a subtopic and add new cards to an existing deck without duplicating co
 **Arguments:** $ARGUMENTS
 
 Parse `$ARGUMENTS` to extract:
-- **Deck name**: the first word/token (matches a folder under `decks/`)
+- **Deck name**: the first word/token (matches a kebab-case folder slug under `decks/` — lowercase letters and hyphens only)
 - **Research directive**: everything after the deck name (the subtopic to research, e.g. "add list comprehensions", "cover error handling patterns", "expand on sorting algorithms")
 
 ## Steps
@@ -36,6 +36,8 @@ Based on the research directive:
    - If they fit an existing sub-deck's scope → append to that sub-deck's `cards.yaml`
    - If they represent a new subtopic → create a new `decks/<deck-name>/sub-decks/<new-sub-slug>/cards.yaml`
    - If they are broad overview cards → append to the root `cards.yaml`
+
+**Important:** For sub-deck `cards.yaml` files, set `config.name` to ONLY the sub-topic display name (e.g., `"Lists"`), NOT the full hierarchy path. The builder automatically prepends the root deck name with `::` separator.
 
 ### 4. Update the README
 
@@ -68,9 +70,9 @@ else:
 "
 ```
 
-Replace `<deck-name>` with the actual deck folder name.
+Replace `<deck-name>` with the actual deck folder name (kebab-case slug — lowercase letters and hyphens only).
 
-6. **If validation fails**, fix the errors and re-validate until all files pass.
+**If validation fails**, fix the errors and re-validate until all files pass.
 
 ### 6. Report
 

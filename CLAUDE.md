@@ -3,7 +3,7 @@
 ## Constraints
 <!-- Orchestrator-owned: things agents must never do -->
 - Never modify `.apkg` files directly — always regenerate from YAML source via the build skill
-- Never delete or overwrite a deck's `README.md` without explicit user approval
+- Never delete or overwrite a deck's `README.md` without explicit user approval (skill invocations count as implicit approval)
 - All card data must live in YAML source files inside `decks/` — no loose card data elsewhere
 - Do not commit `.dreamers/` or `build/` directories
 - Skills must be idempotent — running twice must not duplicate cards or corrupt deck structure

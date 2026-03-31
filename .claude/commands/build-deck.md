@@ -2,9 +2,7 @@
 
 Build an Anki deck from YAML source files and produce an importable `.apkg` file.
 
-**Deck name:** $ARGUMENTS
-
-## Steps
+**Deck name:** $ARGUMENTS (kebab-case slug — lowercase letters and hyphens only)
 
 1. **Locate the deck folder** at `decks/$ARGUMENTS/`. If it does not exist, report an error listing available decks in `decks/`.
 

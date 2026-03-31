@@ -2,9 +2,7 @@
 
 Review and improve an existing Anki deck's card quality, structure, and organization.
 
-**Deck name:** $ARGUMENTS
-
-## Critical Rule
+**Deck name:** $ARGUMENTS (kebab-case slug — lowercase letters and hyphens only)
 
 **NEVER delete content without replacing it.** Every fact in the deck must be preserved. You may reword, merge, split, or reorganize — but no factual content may be lost.
 
@@ -83,7 +81,7 @@ else:
 "
 ```
 
-7. **If validation fails**, fix the errors and re-validate until all files pass.
+**If validation fails**, fix the errors and re-validate until all files pass.
 
 ### 7. Report a change summary
 

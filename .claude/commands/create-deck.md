@@ -10,7 +10,7 @@ Generate a complete Anki deck for a given topic, with sub-decks, README, and val
 
 1. **Analyze the topic** from `$ARGUMENTS`. Determine the key sub-topics that warrant their own sub-decks. Aim for 3–6 sub-decks unless the topic is narrow enough for a single flat deck.
 
-2. **Derive the folder slug** from the topic. Use lowercase kebab-case (e.g. "Python Data Structures" → `python-data-structures`).
+2. **Derive the folder slug** from the topic. Use lowercase kebab-case (lowercase letters and hyphens only — e.g. "Python Data Structures" → `python-data-structures`).
 
 3. **Outline the structure** before generating any cards:
    - Root deck name (using the Anki `::` hierarchy convention for display)
@@ -32,6 +32,8 @@ Generate a complete Anki deck for a given topic, with sub-decks, README, and val
    - `cards`: 3–8 high-level overview cards that span the whole topic
 
 6. **Create `decks/<slug>/sub-decks/<sub-slug>/cards.yaml`** for each sub-topic. Each file should contain 8–20 focused cards.
+
+**Important:** For sub-deck `cards.yaml` files, set `config.name` to ONLY the sub-topic display name (e.g., `"Lists"`), NOT the full hierarchy path. The builder automatically prepends the root deck name with `::` separator.
 
 ### Pass 3 — Validate
 
