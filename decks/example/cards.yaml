@@ -1,0 +1,45 @@
+config:
+  name: "Example"
+  description: "A sample deck demonstrating basic and cloze card types."
+  tags:
+    - example
+
+cards:
+  - type: basic
+    front: "What is the chemical symbol for gold?"
+    back: "Au (from Latin 'aurum')"
+    tags:
+      - chemistry
+      - elements
+
+  - type: basic
+    front: "What year did the Berlin Wall fall?"
+    back: "1989"
+    tags:
+      - history
+
+  - type: basic
+    front: "What is the largest planet in our solar system?"
+    back: "Jupiter"
+
+  - type: basic
+    front: "Who wrote 'The Art of War'?"
+    back: "Sun Tzu"
+    tags:
+      - literature
+      - history
+
+  - type: cloze
+    text: "The speed of light in a vacuum is approximately {{c1::299,792,458}} meters per second."
+    tags:
+      - physics
+
+  - type: cloze
+    text: "Water boils at {{c1::100}}°C at standard atmospheric pressure, which is {{c2::212}}°F."
+    tags:
+      - chemistry
+
+  - type: cloze
+    text: "{{c1::Mitochondria}} are known as the powerhouse of the cell."
+    tags:
+      - biology
